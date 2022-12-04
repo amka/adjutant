@@ -19,16 +19,14 @@ class _HomePageState extends State<HomePage> {
         toolbarHeight: 48,
       ),
       body: SafeArea(
-        child: Expanded(
-          child: Row(
-            children: const [
-              SizedBox(
-                width: 260,
-                child: Sidebar(),
-              ),
-              VerticalDivider(width: 1),
-            ],
-          ),
+        child: Row(
+          children: const [
+            SizedBox(
+              width: 260,
+              child: Sidebar(),
+            ),
+            VerticalDivider(width: 1),
+          ],
         ),
       ),
     );
