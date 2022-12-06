@@ -33,6 +33,7 @@ dependencies:
     sdk: flutter
 
   line_icons: ^2.0.1
+  carbon_icons: ^0.0.1+2
   google_fonts: ^3.0.1
 
   go_router: ^5.2.1
