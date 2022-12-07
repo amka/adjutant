@@ -4,10 +4,18 @@ import 'package:line_icons/line_icon.dart';
 import '../models/atask.dart';
 
 class TaskTile extends StatelessWidget {
-  const TaskTile({super.key, required this.task, this.onStateChanged});
+  const TaskTile({
+    super.key,
+    required this.task,
+    this.onStateChanged,
+    this.onFavoriteToggle,
+    this.onTaskDetails,
+  });
 
   final ATask task;
   final void Function(bool? value)? onStateChanged;
+  final void Function(bool? value)? onFavoriteToggle;
+  final void Function(ATask task)? onTaskDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +40,9 @@ class TaskTile extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (onTaskDetails != null) onTaskDetails!(task);
+                },
                 icon: LineIcon.angleRight(),
                 iconSize: 16,
                 splashRadius: 16,
