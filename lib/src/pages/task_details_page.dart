@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../components/sidebar.dart';
-import '../components/tasks_list.dart';
 import '../models/atask.dart';
+import '../components/tasks_list.dart';
+import '../components/task_view.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class TaskDetailsPage extends StatefulWidget {
+  const TaskDetailsPage({super.key, this.taskId});
+
+  final int? taskId;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<TaskDetailsPage> createState() => _TaskDetailsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  ATask? selectedTask;
-
+class _TaskDetailsPageState extends State<TaskDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Adjutant',
-          style: GoogleFonts.comfortaa(),
-        ),
-        automaticallyImplyLeading: false,
-        primary: true,
+        title: Text('Task [${widget.taskId}] Details',
+            style: GoogleFonts.comfortaa()),
         elevation: 2,
         toolbarHeight: 48,
         flexibleSpace: Container(
@@ -35,7 +31,7 @@ class _HomePageState extends State<HomePage> {
                 end: Alignment.bottomRight,
                 colors: [
                   Theme.of(context).colorScheme.primary,
-                  Color(0xff6667AB)
+                  const Color(0xff6667AB)
                 ]),
           ),
         ),
@@ -54,10 +50,8 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: TasksList(
                 onTaskDetails: (task) {
-                  context.goNamed(
-                    'taskDetails',
-                    params: {'taskId': task.id.toString()},
-                  );
+                  setState(() {});
+                  Scaffold.of(context).openDrawer();
                 },
                 color: Theme.of(context).colorScheme.primary.withAlpha(25),
               ),

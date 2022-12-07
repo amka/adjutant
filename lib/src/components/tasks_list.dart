@@ -1,3 +1,4 @@
+import 'package:adjutant/src/components/task_view.dart';
 import 'package:flutter/material.dart';
 
 import '../models/atask.dart';
@@ -5,8 +6,10 @@ import 'task_input.dart';
 import 'task_tile.dart';
 
 class TasksList extends StatefulWidget {
-  const TasksList({super.key, this.color});
+  const TasksList({super.key, this.color, this.onTaskDetails});
   final Color? color;
+
+  final void Function(ATask task)? onTaskDetails;
 
   @override
   State<TasksList> createState() => _TasksListState();
@@ -36,6 +39,33 @@ class _TasksListState extends State<TasksList> {
                       setState(() {
                         task.state = value! ? TaskState.done : TaskState.open;
                       });
+                    },
+                    onTaskDetails: (task) {
+                      if (widget.onTaskDetails != null) {
+                        widget.onTaskDetails!(task);
+                      }
+                      // showDialog(
+                      //   context: context,
+                      //   builder: (context) {
+                      //     return Row(
+                      //       mainAxisAlignment: MainAxisAlignment.end,
+                      //       children: [
+                      //         SimpleDialog(
+                      //           contentPadding: EdgeInsets.all(12),
+                      //           children: [
+                      //             SizedBox(
+                      //               // width: 360,
+                      //               child: Padding(
+                      //                 padding: const EdgeInsets.all(12.0),
+                      //                 child: TaskView(task: task),
+                      //               ),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ],
+                      //     );
+                      //   },
+                      // );
                     },
                   );
                 },
